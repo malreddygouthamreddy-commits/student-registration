@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Event Registration</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f6fb;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.events{
+margin-top:10px;
+}
+
+.events label{
+font-weight:normal;
+display:block;
+}
+
+.payment-box{
+margin-top:20px;
+padding:15px;
+border:2px dashed #ccc;
+border-radius:10px;
+text-align:center;
+}
+
+.qr{
+width:250px;
+margin:15px auto;
+display:block;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:20px;
+background:black;
+color:white;
+font-size:16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:disabled{
+background:#999;
+}
+
+#otherBranch{
+display:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Student Registration</h1>
+
+<form id="form">
+
+<label>Email</label>
+<input type="email" required>
+
+<label>Student Name</label>
+<input type="text" required>
+
+<label>Contact Number</label>
+<input type="tel" pattern="[6-9]{1}[0-9]{9}" placeholder="10 digit number" required>
+
+<label>College Name</label>
+<input type="text" required>
+
+
+<label>Branch</label>
+<select id="branch" required>
+<option value="">Select Branch</option>
+<option>CSE</option>
+<option>ECE</option>
+<option>EEE</option>
+<option>CIVIL</option>
+<option>Other</option>
+</select>
+
+<input type="text" id="otherBranch" placeholder="Enter your branch">
+
+
+<label>Technical Events</label>
+
+<div class="events">
+<label><input type="checkbox"> PPT Presentation</label>
+<label><input type="checkbox"> Technical Quiz</label>
+<label><input type="checkbox"> Technical Seminar</label>
+<label><input type="checkbox"> Essay Writing</label>
+</div>
+
+
+<div class="payment-box">
+
+<h3>Event Registration Fee ₹100</h3>
+
+<p>Scan the QR code and complete payment</p>
+
+<img src="C:\Users\USER\OneDrive\Documents\Own Projects\login format\WhatsApp Image 2026-03-11 at 12.41.02 PM.jpeg" class="qr">
+
+<p><b>UPI ID:</b> vijaykumarnenavath-5@okhdfcbank</p>
+
+<label>
+<input type="checkbox" id="paymentCheck">
+I have paid ₹100
+</label>
+
+<label>Upload Payment Screenshot</label>
+<input type="file" id="screenshot" required>
+
+</div>
+
+
+<button id="submitBtn" disabled>Submit Registration</button>
+
+</form>
+
+</div>
+
+
+<script>
+
+let branch = document.getElementById("branch");
+let other = document.getElementById("otherBranch");
+let payment = document.getElementById("paymentCheck");
+let screenshot = document.getElementById("screenshot");
+let submit = document.getElementById("submitBtn");
+
+branch.addEventListener("change",()=>{
+if(branch.value=="Other"){
+other.style.display="block";
+other.required=true;
+}
+else{
+other.style.display="none";
+other.required=false;
+}
+});
+
+function validate(){
+if(payment.checked && screenshot.files.length>0){
+submit.disabled=false;
+}else{
+submit.disabled=true;
+}
+}
+
+payment.addEventListener("change",validate);
+screenshot.addEventListener("change",validate);
+
+</script>
+
+</body>
+</html>
